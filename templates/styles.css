@@ -1,0 +1,46 @@
+body {
+    counter-reset: page;
+}
+
+@media print {
+    .no-print,
+    .card,
+    .print-hide {
+        display: none;
+    }
+    .print-only {
+        display: block;
+    }
+
+    .qr-code-page {
+        counter-increment: page;
+    }
+
+    .qr-code-page:not(:first-of-type)::before {
+        content: "Page " counter(page);
+        display: block;
+        page-break-before: always;
+    }
+}
+
+@media screen {
+    .print-only {
+        display: none;
+    }
+}
+
+.qr-code-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.qr-code-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(25% - 10px);
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+}
